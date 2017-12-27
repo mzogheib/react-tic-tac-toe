@@ -7,7 +7,6 @@ function Square(props) {
         <button
             className="square"
             onClick={props.onClick}
-            disabled={props.value}
         >
             {props.value}
         </button>
@@ -26,6 +25,7 @@ class Board extends React.Component {
     handleClick(i) {
         // call slice() to make a copy. Immutability is important
         const squares = this.state.squares.slice();
+        if (this.calculateWinner(squares) || squares[i]) return;
         squares[i] = this.state.xIsNext ? 'X' : 'O';
         this.setState({
             squares: squares,
