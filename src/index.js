@@ -20,6 +20,13 @@ class Board extends React.Component {
         };
     }
 
+    handleClick(i) {
+        // call slice() to make a copy. Immutability is important
+        const squares = this.state.squares.slice();
+        squares[i] = 'X';
+        this.setState({ squares: squares });
+    }
+
     renderSquare(i) {
         return (
             <Square
