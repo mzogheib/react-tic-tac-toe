@@ -53,6 +53,7 @@ class Game extends React.Component {
             history: [{
                 squares: Array(9).fill(null),
             }],
+            stepNumber: 0,
             xIsNext: true,
         };
     }
@@ -62,15 +63,22 @@ class Game extends React.Component {
         const current = history[history.length - 1];
         // call slice() to make a copy. Immutability is important
         const squares = current.squares.slice();
-
+        
         if (calculateWinner(squares) || squares[i]) return;
-
+        
         squares[i] = this.state.xIsNext ? 'X' : 'O';
         this.setState({
             history: history.concat([{
                 squares: squares,
             }]),
             xIsNext: !this.state.xIsNext,
+        });
+    }
+
+    jumpTo(step) {
+        this.setState({
+            stepNumber: step,
+            xIsNext: (step % 2) === 0,
         });
     }
 
