@@ -15,6 +15,7 @@ function Square(props) {
         super(props);
         this.state = {
             squares: Array(9).fill(null),
+            xIsNext: true,
         };
     }
 
@@ -22,7 +23,10 @@ function Square(props) {
         // call slice() to make a copy. Immutability is important
         const squares = this.state.squares.slice();
         squares[i] = 'X';
-        this.setState({ squares: squares });
+        this.setState({
+            squares: squares,
+            xIsNext: !this.state.xIsNext,
+        });
     }
 
     renderSquare(i) {
